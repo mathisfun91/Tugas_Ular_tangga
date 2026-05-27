@@ -1,0 +1,119 @@
+import java.util.ArrayList;
+import java.util.List;
+public class GameState {
+    
+    private List<Player> players;
+    private int currentPlayerIndex;
+    private GameStatus status;
+    private Player winner;
+    private int roundNumber;
+    private List<Move> moveLog;
+
+    // Constructor
+    public GameState() {
+        players = new ArrayList<>();
+        moveLog = new ArrayList<>();
+        currentPlayerIndex = 0;
+        roundNumber = 1;
+        status = GameStatus.SETUP;
+        winner = null;
+    }
+
+    // Getter dan Setter
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public int getCurrentPlayerIndex() {
+        return currentPlayerIndex;
+    }
+
+    public void setCurrentPlayerIndex(int currentPlayerIndex) {
+        this.currentPlayerIndex = currentPlayerIndex;
+    }
+
+    public GameStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(GameStatus status) {
+        this.status = status;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Player winner) {
+        this.winner = winner;
+    }
+
+    public int getRoundNumber() {
+        return roundNumber;
+    }
+
+    public void setRoundNumber(int roundNumber) {
+        this.roundNumber = roundNumber;
+    }
+
+    public List<Move> getMoveLog() {
+        return moveLog;
+    }
+
+    public void setMoveLog(List<Move> moveLog) {
+        this.moveLog = moveLog;
+    }
+
+    // Method tambahan
+
+    public void addPlayer(Player player) {
+        players.add(player);
+    }
+
+    public Player getCurrentPlayer() {
+        return players.get(currentPlayerIndex);
+    }
+
+    public void nextTurn() {
+        currentPlayerIndex++;
+
+        if (currentPlayerIndex >= players.size()) {
+            currentPlayerIndex = 0;
+            roundNumber++;
+        }
+    }
+
+    public void addMove(Move move) {
+        moveLog.add(move);
+    }
+
+    public boolean isGameFinished() {
+        return status == GameStatus.FINISHED;
+    }
+
+    private static class Player {
+
+        public Player() {
+        }
+    }
+
+    private static class GameStatus {
+
+        private static GameStatus SETUP;
+        private static GameStatus FINISHED;
+
+        public GameStatus() {
+        }
+    }
+
+    private static class Move {
+
+        public Move() {
+        }
+    }
+}
